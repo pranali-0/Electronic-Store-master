@@ -29,4 +29,6 @@ public class User {
     private String about;
     @Column(name = "user_image_name")
     private String imagename;
+    @Column(name= "user_address")
+    private String address;
 }

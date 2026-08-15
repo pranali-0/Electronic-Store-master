@@ -63,3 +63,7 @@ public class DataMaskingPatternLayout  extends PatternLayout{
     public String userDetails(String details) {
         return details;
 }
+public String userAddress(String address) {
+        return address;
+    }
+}

@@ -60,4 +60,6 @@ public class DataMaskingPatternLayout  extends PatternLayout{
         return name;
    
     }
+    public String userDetails(String details) {
+        return details;
 }

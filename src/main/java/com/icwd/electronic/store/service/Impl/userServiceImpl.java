@@ -84,6 +84,14 @@ public class userServiceImpl implements userServiceI {
         log.info("Completed Dao Call For Get All UserData ");
         return response;
     }
+    @Override
+    public List<UserDto> searchUserDocument(String pattern) {
+        log.info("Entering Dao Call For Search The UserData :{}", pattern);
+        List<User> byUseridContaining = this.userRepository.findByUseridContaining(pattern);
+        List<UserDto> collect = byUseridContaining.stream().map(user -> this.UserToDto(user)).collect(Collectors.toList());
+        log.info("Completed Dao Call For Search The UserData :{}", pattern);
+        return collect;
+    }
 
     @Override
     public UserDto getUserById(String userid) {
@@ -146,3 +154,12 @@ public class userServiceImpl implements userServiceI {
     }
 
 }
+
+@Override
+    public List<UserDto> findUsers(String pattern) {
+        log.info("Entering Dao Call For Search The UserData :{}", pattern);
+        List<User> byUseridContaining = this.userRepository.findByUseridContaining(pattern);
+        List<UserDto> collect = byUseridContaining.stream().map(user -> this.UserToDto(user)).collect(Collectors.toList());
+        log.info("Completed Dao Call For Search The UserData :{}", pattern);
+        return collect;
+    }

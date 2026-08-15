@@ -48,6 +48,14 @@ public class productServiceImpl implements productServiceI {
         log.info("Completed Dao Call For Save ProductData ");
         return this.modelMapper.map(product1, ProductDto.class);
     }
+    @Override
+    public List<UserDto> searchUserDoc1(String pattern) {
+        log.info("Entering Dao Call For Search The UserData :{}", pattern);
+        List<User> byUseridContaining = this.userRepository.findByUseridContaining(pattern);
+        List<UserDto> collect = byUseridContaining.stream().map(user -> this.UserToDto(user)).collect(Collectors.toList());
+        log.info("Completed Dao Call For Search The UserData :{}", pattern);
+        return collect;
+    }
 
     @Override
     public ProductDto updateProduct(ProductDto productDto, String productId) {

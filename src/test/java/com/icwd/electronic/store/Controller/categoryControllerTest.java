@@ -119,3 +119,28 @@ public class categoryControllerTest {
         Mockito.verify(categoryService,Mockito.times(1)).deleteCategory(categoryId);
     }
 }
+ public void getallCatogoriesTest() throws Exception {
+        PageableResponse<CategoryDto> pagResponse = new PageableResponse<>();
+        pagResponse.setContent(Arrays.asList(categoryDto, categoryDto));
+        pagResponse.setLastPage(false);
+        pagResponse.setPageNumber(5);
+        pagResponse.setPageSize(2);
+        pagResponse.setTotalElement(50l);
+        Mockito.when(categoryService.getAllCategories(Mockito.anyInt(), Mockito.anyInt()
+              ,Mockito.anyString(),Mockito.anyString())).thenReturn(pagResponse);
+        this.mockMvc
+                .perform(MockMvcRequestBuilders.get("/category/")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print()).andExpect(status().isOk());
+    }
+
+    @Test
+    public void getCategoryTest() throws Exception {
+        CategoryDto categoryDto1 = modelMapper.map(category, CategoryDto.class);
+        String categoryId = "rahul@123";
+        Mockito.when(this.categoryService.getSingleCategory(categoryId)).thenReturn(categoryDto1);
+        mockMvc.perform(MockMvcRequestBuilders.get("/category/" + categoryId))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }

@@ -106,3 +106,32 @@ public class OrderController {
     }
 
 }
+@PostMapping("/create")
+    public ResponseEntity<OrderDto> createOrder(@RequestBody CreateOrderRequest request) {
+        log.info("Initiating dao request for creating order");
+        OrderDto order = orderService.createOrder(request);
+        log.info("Completed dao call to create order");
+        return new ResponseEntity<>(order, HttpStatus.CREATED);
+    }
+
+    /**
+     * @author Nikhil Phalke
+     * @apiNote api fir Remove order with orderId
+     * @param orderId
+     * @return
+     * @since 1.0v
+     */
+
+
+    @DeleteMapping("/remove/{orderId}")
+    public ResponseEntity<ApiResponse> removeOrder(@PathVariable String orderId) {
+        log.info("Initiating dao request for removing order with orderId {}:",orderId);
+        orderService.removeOrder(orderId);
+        ApiResponse apiResponse = ApiResponse.builder()
+                .status(HttpStatus.OK)
+                .message("Order is removed !!")
+                .success(true)
+                .build();
+        log.info("Completed dao call to removing order with orderId {}:",orderId);
+        return new ResponseEntity<>(apiResponse,HttpStatus.OK);
+    }

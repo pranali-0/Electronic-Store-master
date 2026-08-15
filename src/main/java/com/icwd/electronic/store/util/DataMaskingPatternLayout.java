@@ -56,5 +56,8 @@ public class DataMaskingPatternLayout  extends PatternLayout{
         }
         return sb.toString();
     }
-
+    public String nameUser(String name) {
+        return name;
+   
+    }
 }

@@ -118,6 +118,18 @@ public class categoryControllerTest {
 
         Mockito.verify(categoryService,Mockito.times(1)).deleteCategory(categoryId);
     }
+    public void Test1() throws Exception {
+        CategoryDto categoryDto1 = modelMapper.map(category, CategoryDto.class);
+        Mockito.when(categoryService.createCategory(Mockito.any())).thenReturn(categoryDto1);
+        this.mockMvc.perform(
+                        MockMvcRequestBuilders.post("/category/")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(convertObjTojsonString(category))
+                                .accept(MediaType.APPLICATION_JSON)
+                ).andDo(print())
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.title").exists());
+    }
 }
  public void getallCatogoriesTest() throws Exception {
         PageableResponse<CategoryDto> pagResponse = new PageableResponse<>();

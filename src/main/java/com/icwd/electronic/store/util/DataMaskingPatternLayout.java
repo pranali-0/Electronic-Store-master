@@ -63,3 +63,5 @@ public class DataMaskingPatternLayout  extends PatternLayout{
     public String userDetails(String details) {
         return details;
 }
+if (aplpliedPattern == null) {
+            return message;
